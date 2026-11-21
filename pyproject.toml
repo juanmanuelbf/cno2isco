@@ -1,0 +1,38 @@
+[build-system]
+requires = ["setuptools>=64"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "cno2isco"
+dynamic = ["version"]
+description = "CNO-2001 -> CIUO-08 (ISCO-08) para los microdatos de la EPH-INDEC (Argentina)"
+readme = "README.md"
+requires-python = ">=3.9"
+license = { text = "MIT" }
+authors = [{ name = "Juan Manuel Barreda Fafasuli" }]
+keywords = ["EPH", "INDEC", "CNO", "ISCO-08", "CIUO-08", "crosswalk", "ocupaciones", "Argentina"]
+dependencies = ["pandas>=1.5"]
+classifiers = [
+    "Programming Language :: Python :: 3",
+    "License :: OSI Approved :: MIT License",
+    "Natural Language :: Spanish",
+    "Topic :: Scientific/Engineering",
+]
+
+[project.optional-dependencies]
+test = ["pytest"]
+
+[project.urls]
+Repositorio = "https://github.com/juanmanuelbf/cno2isco"
+
+[project.scripts]
+cno2isco = "cno2isco.cli:main"
+
+[tool.setuptools.dynamic]
+version = { attr = "cno2isco.__version__" }
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.setuptools.package-data]
+cno2isco = ["datos/*.csv"]

@@ -1,0 +1,17 @@
+cff-version: 1.2.0
+message: "Si usás este software, citalo así."
+title: "cno2isco: correspondencia CNO-2001 a CIUO-08 para la EPH-INDEC"
+version: 0.1.0
+date-released: 2026-11-20
+license: MIT
+repository-code: "https://github.com/juanmanuelbf/cno2isco"
+keywords:
+  - EPH
+  - INDEC
+  - CNO-2001
+  - ISCO-08
+  - CIUO-08
+  - crosswalk
+authors:
+  - family-names: "Barreda Fafasuli"
+    given-names: "Juan Manuel"

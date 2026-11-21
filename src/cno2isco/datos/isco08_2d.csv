@@ -1,0 +1,44 @@
+isco08_2d,descripcion,isco08_gran_grupo
+01,Oficiales de las fuerzas armadas,0
+02,Suboficiales de las fuerzas armadas,0
+03,Otros miembros de las fuerzas armadas,0
+11,"Directores ejecutivos, personal directivo de la administración pública y miembros del poder ejecutivo y de los cuerpos legislativos",1
+12,Directores administradores y comerciales,1
+13,Directores y gerentes de producción y operaciones,1
+14,"Gerentes de hoteles, restaurantes, comercios y otros servicios",1
+21,Profesionales de las ciencias y de la ingeniería,2
+22,Profesionales de la salud,2
+23,Profesionales de la enseñanza,2
+24,Especialistas en organización de la administración pública y de empresas,2
+25,Profesionales de tecnología de la información y las comunicaciones,2
+26,"Profesionales en derecho, en ciencias sociales y culturales",2
+31,Profesionales de las ciencias y la ingeniería de nivel medio,3
+32,Profesionales de nivel medio de la salud,3
+33,Profesionales de nivel medio en operaciones financieras y administrativas,3
+34,"Profesionales de nivel medio de servicios jurídicos, sociales, culturales y afines",3
+35,Técnicos de la tecnología de la información y las comunicaciones,3
+41,Oficinistas,4
+42,Empleados en trato directo con el público,4
+43,Empleados contables y encargados del registro de materiales,4
+44,Otro personal de apoyo administrativo,4
+51,Trabajadores de los servicios personales,5
+52,Vendedores,5
+53,Trabajadores de los cuidados personales,5
+54,Personal de los servicios de protección,5
+61,Agricultores y trabajadores calificados de explotaciones agropecuarias con destino al mercado,6
+62,"Trabajadores forestales calificados, pescadores y cazadores",6
+63,"Trabajadores agropecuarios, pescadores, cazadores y recolectores de subsistencia",6
+71,Oficiales y operarios de la construcción excluyendo electricistas,7
+72,"Oficiales y operarios de la metalurgia, la construcción mecánica y afines",7
+73,Artesanos y operarios de las artes gráficas,7
+74,Trabajadores especializados en electricidad y la electrotecnología,7
+75,"Operarios y oficiales de procesamiento de alimentos, de la confección, ebanistas, otros artesanos y afines",7
+81,Operadores de instalaciones fijas y máquinas,8
+82,Ensambladores,8
+83,Conductores de vehículos y operadores de equipos pesados móviles,8
+91,Limpiadores y asistentes,9
+92,"Peones agropecuarios, pesqueros y forestales",9
+93,"Peones de la minería, la construcción, la industria manufacturera y el transporte",9
+94,Ayudantes de preparación de alimentos,9
+95,Vendedores ambulantes de servicios y afines,9
+96,Recolectores de desechos y otras ocupaciones elementales,9
