@@ -23,7 +23,7 @@ correspondencias del INDEC y completando los casos que la tabla no cubre con reg
 
 ## 🚀 Uso, paso a paso
 
-**Requisito:** Python 3.9 o más nuevo.
+**Requisito:** Python 3.9 o superior.
 
 **1. Instalá el paquete** (una sola vez):
 
@@ -123,7 +123,7 @@ df = cno2isco.cross(df)   # necesita ESTADO, PP04D_COD y PP04B_COD (y PP11D_COD,
 
 ---
 
-## 🧭 Cómo funciona (en corto)
+## 🧭 Cómo funciona (resumido)
 
 1. **Tabla del INDEC.** Si el código CNO está en la tabla oficial de correspondencias, se usa el
    CIUO que indica.
