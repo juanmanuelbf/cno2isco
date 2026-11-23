@@ -2,8 +2,6 @@
 
 # cno2isco
 
-**Pasá las ocupaciones de la EPH del CNO-2001 a la CIUO-08 (ISCO-08) con un solo comando.**
-
 ![Python](https://img.shields.io/badge/python-3.9%2B-blue)
 ![Licencia](https://img.shields.io/badge/licencia-MIT-green)
 ![Versión](https://img.shields.io/badge/versi%C3%B3n-0.1.0-orange)
