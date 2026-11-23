@@ -27,10 +27,6 @@ organiza las ocupaciones por tipo de tareas y nivel de competencias, en 10 grand
 (1 dígito), 43 subgrupos principales (2 dígitos), 130 subgrupos (3) y 436 grupos primarios (4).
 `cno2isco` llega a **2 dígitos**, que es la resolución de la tabla oficial.
 
-Las dos clasificaciones parten de lógicas distintas: el CNO describe el proceso de trabajo con
-dimensiones independientes, la CIUO agrupa ocupaciones concretas. Por eso la correspondencia no
-es exacta y requiere decisiones.
-
 ## 2. Fuente: la tabla de correspondencias del INDEC
 
 El punto de partida es la **tabla de correspondencia entre el CNO-2001 y la CIUO-08** que publica
@@ -42,13 +38,6 @@ el INDEC junto con los clasificadores de la EPH:
   [INDEC, Bases de datos → EPH → Clasificadores y códigos](https://sitioanterior.indec.gob.ar/bases-de-datos.asp?solapa=1)
   (*"Tabla de correspondencia Clasificador Nacional de Ocupaciones 2001 (CNO 2001) y
   Clasificación Internacional Uniforme de Ocupaciones 2008 (CIUO-08)"*).
-
-**Contexto.** En 2015 el INDEC adoptó la CIUO-08 como clasificador para el Sistema Estadístico
-Nacional, pero en 2018 dejó sin efecto esa decisión y mantuvo el CNO. La
-[Resolución INDEC 73/2018](https://www.boletinoficial.gob.ar/detalleAviso/primera/181689/20180416)
-señala que el CNO cuenta desde su creación con una tabla de correspondencias a 2 dígitos con la
-CIUO, que es la que permite la comparación internacional. Por eso la EPH sigue codificando la
-ocupación en CNO-2001 y la CIUO-08 hay que construirla con esa tabla.
 
 La tabla se convirtió a CSV sin cambiar ninguna correspondencia (las únicas correcciones, en la
 sección 4, son de etiquetas). Así queda en `src/cno2isco/datos/`:
@@ -99,7 +88,7 @@ gran grupo, salvo que la rama lo complete) y deja 186 sin resolver.
 
 ### 3.2. Por qué carácter y calificación
 
-**Qué dimensiones dejar libres.** Dentro de la propia tabla del INDEC se miraron bloques de
+Dentro de la propia tabla del INDEC se miraron bloques de
 códigos que coinciden en todo menos en una dimensión, y se contó en qué proporción de esos
 bloques todos los códigos van al mismo CIUO:
 
@@ -110,30 +99,24 @@ bloques todos los códigos van al mismo CIUO:
 | Calificación | 9,9 % |
 | Carácter | 0 % |
 
-Jerarquía y tecnología casi no cambian el CIUO, mientras que carácter y calificación lo
-determinan. Tiene sentido con la lógica de la CIUO-08, que agrupa por tipo de tarea (carácter) y
-nivel de competencias (calificación): un administrativo es administrativo trabaje o no con
-computadora, y sea o no jefe de sección.
+Jerarquía y tecnología casi no cambian el CIUO, mientras que carácter y calificación son muy determinatnes. Esto tiene sentido considerando la lógica de la CIUO-08, que agrupa por tipo de tarea (carácter) y nivel de competencias (calificación). Ej: un administrativo sigue siéndolo trabaje o no con computadora y sea o no jefe de sección.
 
-**Cuán estricta hacer la regla.** Se probaron dos variantes prediciendo, para cada código que
-*sí* está en la tabla, su CIUO a partir de los demás (validación dentro de la tabla):
+Para definir qué tan estricta hacer la regla, evaluamos qué tan bien predice el código de las ocupaciones que sí están en la tabla a partir de las demás. Comparamos dos variantes, en la primera solo puede variar la jerarquía y en la segunda pueden variar la jerarquía y la tecnología, y solo se predice cuando hay al menos dos vecinos.
 
 | Regla | Predicción acertada |
 |---|---:|
 | Varía sólo la jerarquía | 91,5 % |
 | Varían jerarquía y tecnología, con mínimo 2 vecinos | 96,2 % |
 
-Se eligió la segunda: acierta más y su costo en casos sin clasificar es chico.
+A su vez, esta segunda regla no solo acierta más en las predicciones, sino que permite clasificar más casos. Eso se vincula con el hecho de que, al permitir variar solo jerarquía, manteniendo constantes las demás dimensiones, existan más casos sin vecinos. 
+
+Para los ocupados ponderados del periodo 2017T1-2026T1 obtenemos el siguiente resultado: 
 
 | Regla | % con CIUO a 2 dígitos | % sin clasificar |
 |---|---:|---:|
 | Varía sólo la jerarquía | 93,42 | 3,82 |
 | **Varían jerarquía y tecnología, con mínimo 2 vecinos** (la elegida) | **95,72** | **1,33** |
 
-*Período 2017T1-2026T1, ocupados, casos ponderados con `PONDERA`.*
-
-La regla elegida no sólo acierta más en la validación: como agrupa más códigos por bloque, también
-clasifica más casos.
 
 ### 3.3. Rama de actividad
 
@@ -143,23 +126,10 @@ La tabla auxiliar usa la **división** CAES (2 dígitos). En los microdatos `PP0
 - a 3 dígitos cuando perdió el cero inicial (`101` → `0101` → división 01);
 - a 1 o 2 dígitos cuando sólo se conoce la división (`48` → 48; `1` → 01).
 
-### 3.4. Normalización del código CNO
-
-`PP04D_COD` pierde los ceros a la izquierda al exportarse (`5002` en lugar de `05002`). Se
-completa a 5 dígitos antes de cualquier búsqueda. El código original queda intacto en la base.
-
 ## 4. Correcciones respecto de los archivos fuente
 
-- **Etiquetas de la CIUO.** La tabla del INDEC no trae los subgrupos 63 (*Trabajadores
-  agropecuarios, pescadores, cazadores y recolectores de subsistencia*) y 82 (*Ensambladores*),
-  aunque el 82 aparece como destino en la tabla auxiliar. Se agregaron con la denominación de la
-  CIUO-08. Se corrigieron dos erratas ("elecrotecnología", "administración publica").
 - **Valores 79 y 89 de la tabla auxiliar.** No existen en la CIUO-08 (12 de las 53 reglas). No se
   usan: esos casos quedan con el gran grupo.
-- **Descripciones de los códigos CNO.** La descripción a 5 dígitos que acompaña a la tabla del
-  INDEC está desalineada en algunos bloques (por ejemplo, en el carácter 81 aparece corrida un
-  nivel de jerarquía). No se incluye. Las etiquetas salen de los dígitos del código, que sí son
-  correctos (`cno01_caracter_desc` y las dimensiones en `docs/diccionario.md`).
 - **9 códigos de la tabla que no están en el catálogo** (`34112`, `34122`, `51201`, `55113`,
   `56111`, `56114`, `60114`, `72114`, `80111`). Se respeta la correspondencia del INDEC.
 

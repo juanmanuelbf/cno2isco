@@ -109,8 +109,6 @@ y para los **desocupados que tuvieron un trabajo anterior** (a partir de esa ocu
 | `isco08_metodo` | Regla que asignó el código (`directo`, `por_actividad`, `vecindad`, ...) |
 | `isco08_caso` | Lo mismo, agrupado en 5 categorías para tabular |
 
-Detalle de cada columna y sus valores en [docs/diccionario.md](docs/diccionario.md).
-
 ### Desde Python
 
 Si ya tenés la base cargada en un `DataFrame`:
@@ -137,26 +135,7 @@ Con esto, para 2017T1-2026T1 queda clasificado a 2 dígitos el **95,7 %** de los
 98,7 % al menos a 1 dígito (casos ponderados). Para los desocupados con ocupación anterior, 95,8 %
 y 98,6 %.
 
-- 📐 [Metodología y justificación](docs/metodologia.md)
-- ⚠️ [Limitaciones](docs/limitaciones.md)
-
----
-
-## ⚠️ A tener en cuenta
-
-- **Formato de los archivos del INDEC.** Las bases no vienen todas igual: nombres distintos,
-  encabezados con y sin comillas, punto o coma decimal, `NA` como faltante, un `;` sobrante al
-  final de las líneas. `cno2isco` corrige todo eso solo (el decimal se unifica a coma). Lo que **no**
-  toca: las entidades HTML en los campos de texto (`A&ntilde;elo`) y las fechas de nacimiento con
-  año de dos dígitos en algunos trimestres.
-- **Sólo la versión txt.** Los `.zip` en formato Excel se ignoran con un aviso.
-- **Si un trimestre aparece dos veces** (por ejemplo, el `.zip` y el `.txt` descomprimido), se usa
-  uno y se avisa.
-- **2020T2 y 2020T3** tienen una muestra reducida (relevamiento telefónico por la pandemia).
-- **El archivo de salida es grande** (alrededor de 1 GB para 2017-2026). Para abrirlo conviene
-  pandas, R o Stata antes que Excel, que tiene un límite de ~1 millón de filas.
-- **Ocupados y desocupados comparten columnas.** Para tabular una sola población, filtrá por
-  `ESTADO` o por `cno01_fuente`.
+- 📐 [Anexo metodológico](docs/metodologia.md)
 
 ---
 
